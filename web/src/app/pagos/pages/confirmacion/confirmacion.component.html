@@ -1,0 +1,28 @@
+<div *ngIf="confirmacionData; else noConfirmacion"
+  class="d-flex flex-column vh-100 justify-content-center align-items-center flex-grow-1">
+  <h1>CLVPS</h1>
+  <h3>LISTO!</h3>
+  <p>Se procesó el pago correctamente</p>
+  <p>Estos son los datos del pago efectuado</p>
+  <p>Se envió una constancia a {{ maskEmail(confirmacionData.emailBuyer) }}</p>
+  <dl class="detalles d-flex flex-column">
+    <dt>Id Operación</dt>
+    <dd>{{confirmacionData.idOrden}}</dd>
+    <dt>Beneficiario</dt>
+    <dd>{{confirmacionData.beneficiario}}</dd>
+    <dt>PAGO</dt>
+    <dd>{{ confirmacionData.montoPagado | currency:'':'S/.':'1.2-2'}}</dd>
+    <dt>FECHA</dt>
+    <dd>{{ confirmacionData.fechaTransaccion | date:'dd/MM/yyyy' }}</dd>
+    <dt>HORA</dt>
+    <dd>{{ confirmacionData.horaTransaccion }}</dd>
+  </dl>
+  <button mat-fab extended (click)="irIndex()">
+    <mat-icon>arrow_back</mat-icon>
+    Regresar
+  </button>
+</div>
+
+<ng-template #noConfirmacion>
+  <p>No hay nada que confirmar</p>
+</ng-template>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title th:text="${titulo}"></title>
+
+<!-- Fuente Nunito -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap"
+	rel="stylesheet">
+
+<!-- Bootstrap -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<style>
+body {
+	font-family: 'Nunito', sans-serif;
+	background-color: #f8f9fa;
+}
+
+.carrito-img {
+	width: 75px;
+	height: 100px;
+	object-fit: cover;
+}
+
+.payment-logo {
+	/* 	width: 64px; */
+	height: 25px;
+}
+
+.payment-content {
+	height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.payment-content a {
+	padding: 10px 30px;
+}
+</style>
+</head>
+<body class="container mt-4">
+	<div class="mt-4">
+		<div class="d-flex justify-content-between mb-4">
+			<div>
+				<h1>
+					<a class="text-success nav-link" th:text="${titulo}" href="/"></a>
+				</h1>
+				<small class="text-secondary ms-2" th:text="${subtitulo}"></small>
+			</div>
+
+		</div>
+		<hr class="mb-4">
+
+		<!-- Lista de Artículos  -->
+		<div class="mb-4">
+			<h1 class="mb-4">Carrito de Compras</h1>
+			<div th:if="${carrito == null or #lists.isEmpty(carrito)}"
+				class="alert alert-warning" role="alert">Carrito de compras
+				vacío. Selecciona productos de la página principal para añadirlos
+				aquí.</div>
+			<div th:if="${carrito != null and !#lists.isEmpty(carrito)}">
+				<table class="table table-bordered mb-3">
+					<thead>
+						<tr>
+							<th>Producto</th>
+							<th>Cantidad</th>
+							<th>Precio Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item : ${carrito}">
+							<td class="d-flex align-items-center justify-content-between">
+								<div class="d-flex align-items-center">
+									<img alt="Imagen de ${item.videojuego.titulo}"
+										th:src="@{${item.videojuego.imagenUrl}}"
+										class="carrito-img me-3">
+									<div class="d-flex flex-column">
+										<span th:text="${item.videojuego.titulo}"></span> <small
+											class="text-secondary"
+											th:text="'S/. ' + ${#numbers.formatDecimal(item.videojuego.precioDescontado, 1, 'COMMA', 2, 'POINT')}"></small>
+									</div>
+								</div>
+								<form th:action="@{/delete-from-cart}" method="post">
+									<input type="hidden" name="id" th:value="${item.videojuego.id}" />
+									<button type="submit" class="btn btn-danger  me-2">
+										<i class="fas fa-trash-alt"></i>
+									</button>
+								</form>
+							</td>
+							<td th:text="${item.cantidad}"></td>
+							<td
+								th:text="'S/. ' + ${#numbers.formatDecimal(item.total, 1, 'COMMA', 2, 'POINT')}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<h4 class="text-end"
+						th:text="'Total: S/. ' + ${#numbers.formatDecimal(totalCarrito, 1, 'COMMA', 2, 'POINT')}"></h4>
+				</div>
+			</div>
+		</div>
+
+		<!-- Métodos de Pago  -->
+		<div class="mb-4"
+			th:if="${carrito != null and !#lists.isEmpty(carrito)}">
+			<h3 class="mb-4">Métodos de pago disponibles</h3>
+			<ul class="nav nav-tabs" id="paymentTabs">
+				<li class="nav-item"><a class="nav-link active" href="#"
+					data-target="#visaMethod"> <img alt="visa"
+						src="/images/Visa_Logo.png" class="payment-logo">
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="#"
+					data-target="#mastercardMethod"><img alt="visa"
+						src="/images/logo-Mastercard.png" class="payment-logo"></a></li>
+				<li class="nav-item"><a class="nav-link" href="#"
+					data-target="#bcpMethod"><img alt="visa"
+						src="/images/logo_bcp.png" class="payment-logo"></a></li>
+				<li class="nav-item"><a class="nav-link" href="#"
+					data-target="#bbvaMethod"><img alt="visa"
+						src="/images/BBVA_2019.svg.png" class="payment-logo"></a></li>
+				<li class="nav-item"><a class="nav-link fw-bold" href="#"
+					data-target="#clvpsMethod">CLVPS</a></li>
+			</ul>
+
+			<div id="visaMethod" class="payment-content">
+				<a href="#" class="btn btn-success"> <i
+					class="fa-solid fa-credit-card me-2"></i> PAGAR CON VISA
+				</a>
+			</div>
+			<div id="mastercardMethod" class="payment-content"
+				style="display: none;">
+				<a href="#" class="btn btn-success"> <i
+					class="fa-solid fa-credit-card me-2"></i> PAGAR CON MASTERCARD
+				</a>
+			</div>
+			<div id="bcpMethod" class="payment-content" style="display: none;">
+				<a href="#" class="btn btn-success"> <i
+					class="fa-solid fa-dollar-sign me-2"></i> PAGAR CON BCP
+				</a>
+			</div>
+			<div id="bbvaMethod" class="payment-content" style="display: none;">
+				<a href="#" class="btn btn-success"> <i
+					class="fa-solid fa-dollar-sign me-2"></i> PAGAR CON BBVA
+				</a>
+			</div>
+			<div id="clvpsMethod" class="payment-content" style="display: none;">
+				<!-- TODO: crear url para CLVPS -->
+				<a th:href="${clvpsUrl}" class="btn btn-success"> <i
+					class="fa-solid fa-dollar-sign me-2"></i> PAGAR CON CLVPS
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#paymentTabs .nav-link').click(function(event) {
+				event.preventDefault();
+				$('#paymentTabs .nav-link').removeClass('active');
+				$(this).addClass('active');
+				$('.payment-content').hide();
+				$($(this).data('target')).show();
+			});
+		});
+	</script>
+</body>
+</html>
+
+

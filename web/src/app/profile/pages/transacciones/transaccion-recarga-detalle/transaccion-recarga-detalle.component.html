@@ -1,0 +1,36 @@
+<div class="my-5">
+  <div class="mx-auto col-10 mb-4">
+    <h2 class="">Detalle de Transacción</h2>
+    <hr>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Nro. de transacción</li>
+      <li class="list-group-item col-9">{{transaction?.id}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Fecha</li>
+      <li class="list-group-item col-9">{{ transaction?.fecha | date:'dd/MM/yyyy' }} {{transaction?.hora}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Tipo de transacción</li>
+      <li class="list-group-item flex-grow-1 col-9">Recarga</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Punto de Canje</li>
+      <li class="list-group-item flex-grow-1 col-9">{{transaction?.recarga?.exchangeSpot?.id}} |
+        {{transaction?.recarga?.exchangeSpot?.razSocial}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Monto Pagado</li>
+      <li class="list-group-item flex-grow-1 col-9">{{ transaction?.monto | currency:'':'S/.':'1.2-2' }}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Monto Recargado</li>
+      <li class="list-group-item flex-grow-1 col-9">{{ transaction?.recarga?.msmra | currency:'':'S/.':'1.2-2' }}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Comisiones</li>
+      <li class="list-group-item flex-grow-1 col-9">{{ (transaction?.recarga?.ges ?? 0) + (transaction?.recarga?.gsm ??
+        0) | currency:'':'S/.':'1.2-2' }}</li>
+    </ul>
+  </div>
+</div>

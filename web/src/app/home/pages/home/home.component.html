@@ -1,0 +1,15 @@
+<mat-sidenav-container class="side-container">
+  <mat-sidenav #sidenav position="end">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="d-flex flex-column vh-100">
+      <app-navbar (toggleSidenav)="sidenav.toggle()"></app-navbar>
+      <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1">
+        <h1>CLVPS</h1>
+        <h3>CARDLESS VIRTUAL PAYMENT SYSTEM</h3>
+        <h5>SISTEMA DE PAGOS VIRTUALES POR INTERNET SIN TARJETA</h5>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

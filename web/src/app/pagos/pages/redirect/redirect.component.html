@@ -1,0 +1,11 @@
+<div class="spinner-overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+  <div class="spinner-container d-flex flex-column justify-content-center align-items-center">
+    <div class="text-black spinner-grow" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <h4 class="text-black mt-4">Cargando...</h4>
+  </div>
+  <div class="alert alert-danger mt-4" role="alert" *ngIf="error">
+    {{error}}
+  </div>
+</div>

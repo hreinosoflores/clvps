@@ -1,0 +1,39 @@
+<div class="my-5">
+  <div class="mx-auto col-10 mb-4">
+    <h2 class="">Detalle de Transacción</h2>
+    <hr>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Nro. de transacción</li>
+      <li class="list-group-item col-9">{{transaction?.id}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Fecha</li>
+      <li class="list-group-item col-9">{{ transaction?.fecha | date:'dd/MM/yyyy' }} {{transaction?.hora}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Tipo de transacción</li>
+      <li class="list-group-item flex-grow-1 col-9">Pago</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Id Orden de Pago</li>
+      <li class="list-group-item flex-grow-1 col-9">{{transaction?.ordenPago?.id}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Estado Orden de Pago</li>
+      <li class="list-group-item flex-grow-1 col-9">{{transaction?.ordenPago?.estado | estadoOrdenPago }}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4" *ngIf="transaction?.tipo == '1'">
+      <li class="list-group-item fw-bold col-3">Razón Social Vendedor</li>
+      <li class="list-group-item flex-grow-1 col-9">{{transaction?.ordenPago?.seller?.raz_social}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4" *ngIf="transaction?.tipo == '2'">
+      <li class="list-group-item fw-bold col-3">Nombre Comprador</li>
+      <li class="list-group-item flex-grow-1 col-9">{{transaction?.ordenPago?.buyer?.nombres}}
+        {{transaction?.ordenPago?.buyer?.apellidos}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">{{transaction?.tipo == '1' ? 'Monto Pagado': 'Monto recibido'}}</li>
+      <li class="list-group-item flex-grow-1 col-9">{{ transaction?.monto | currency:'':'S/.':'1.2-2' }}</li>
+    </ul>
+  </div>
+</div>

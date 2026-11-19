@@ -1,0 +1,17 @@
+.saldo-circle {
+  background-color: #D7E3FF;
+  color: #00458F;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+}
+
+
+button{
+  width: 200px;
+}

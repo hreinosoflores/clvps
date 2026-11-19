@@ -1,0 +1,18 @@
+.side-content {
+  margin: 30px;
+}
+
+
+mat-list-item {
+  cursor: pointer !important;
+  border-radius: 5px !important;
+}
+
+mat-list-item:hover {
+  background-color: #D7E3FF !important;
+
+  .mat-mdc-list-item-title,
+  .mat-mdc-list-item-icon {
+    color: #00458F !important;
+  }
+}

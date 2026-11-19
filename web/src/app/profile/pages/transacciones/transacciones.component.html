@@ -1,0 +1,32 @@
+<div class="my-5">
+  <div class="d-flex flex-column col-10 mx-auto">
+    <h2 class="mb-4">MIS TRANSACCIONES</h2>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nro</th>
+            <th scope="col">Concepto</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of transactions; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ transaction | tipoTransaccion }}</td>
+            <td>
+              <app-transaccion-monto [transaction]="transaction"></app-transaccion-monto>
+            </td>
+            <td>{{ transaction.fecha | date:'dd/MM/yyyy' }} {{transaction.hora}}</td>
+            <td>
+              <button mat-mini-fab (click)="goToDetails(transaction)">
+                <mat-icon>info</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

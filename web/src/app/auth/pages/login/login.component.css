@@ -1,0 +1,17 @@
+main {
+    min-height: 100vh;
+}
+
+
+.titulo {
+    font-size: 30px;
+}
+
+.login-box {
+    width: 450px;
+    border-radius: 10px;
+}
+
+.pass-icono {
+    color: grey;
+}

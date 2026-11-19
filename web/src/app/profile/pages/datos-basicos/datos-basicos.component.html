@@ -1,0 +1,72 @@
+<div class="my-5">
+
+  <div class="d-flex flex-column align-items-center justify-content-center mb-4">
+    <h3 class="">MI SALDO ACTUAL</h3>
+    <div class="saldo-circle shadow">
+      <h3>{{datos?.saldo_soles | currency:'':'S/.':'1.2-2' }}</h3>
+      <h5 class="text-secondary"> {{datos?.saldo_dolares | currency:'':'US$':'1.2-2' }}</h5>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column align-items-center justify-content-center mb-4">
+    <button mat-fab extended *ngIf="usuarioActual()?.rol == 'Buyer'" (click)="recargar()">
+      <mat-icon>currency_exchange</mat-icon>
+      RECARGAR
+    </button>
+  </div>
+
+  <div class="mx-auto col-10 mb-4">
+    <h2 class="">Datos Personales</h2>
+    <hr>
+
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">ID</li>
+      <li class="list-group-item col-9">{{datos?.iD_CLVPS}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">E-mail</li>
+      <li class="list-group-item col-9">{{datos?.correo}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Teléfono</li>
+      <li class="list-group-item flex-grow-1 col-9">{{datos?.telefono}}</li>
+    </ul>
+
+    <ul class="list-group list-group-horizontal mt-4" *ngIf="datos?.nombres">
+      <li class="list-group-item fw-bold col-3">Nombres</li>
+      <li class="list-group-item flex-grow-1 col-9">{{datos?.nombres}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4" *ngIf="datos?.apellidos">
+      <li class="list-group-item fw-bold col-3">Apellidos</li>
+      <li class="list-group-item flex-grow-1 col-9">{{datos?.apellidos}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4" *ngIf="datos?.nro_dni">
+      <li class="list-group-item fw-bold col-3">DNI</li>
+      <li class="list-group-item flex-grow-1 col-9">{{datos?.nro_dni}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4" *ngIf="datos?.nro_carext">
+      <li class="list-group-item fw-bold col-3">Carnet de Extranjería</li>
+      <li class="list-group-item flex-grow-1 col-9">{{datos?.nro_carext}}</li>
+    </ul>
+
+
+    <ul class="list-group list-group-horizontal mt-4" *ngIf="datos?.razon_social">
+      <li class="list-group-item fw-bold col-3">Razón Social</li>
+      <li class="list-group-item flex-grow-1 col-9">{{datos?.razon_social}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal mt-4" *ngIf="datos?.ruc">
+      <li class="list-group-item fw-bold col-3">RUC</li>
+      <li class="list-group-item flex-grow-1 col-9">{{datos?.ruc}}</li>
+    </ul>
+  </div>
+
+  <div class="mx-auto col-10">
+    <h2 class="">Datos Cuenta Virtual</h2>
+    <hr>
+    <ul class="list-group list-group-horizontal mt-4">
+      <li class="list-group-item fw-bold col-3">Número de Cuenta</li>
+      <li class="list-group-item flex-grow-1 col-9">{{datos?.nro_cuenta}}</li>
+    </ul>
+  </div>
+
+</div>

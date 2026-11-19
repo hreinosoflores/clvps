@@ -1,0 +1,17 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  padding: 20px;
+}
+
+.nav-item {
+  border-radius: 5px !important;
+}
+
+.nav-item:hover {
+  background-color: #D7E3FF !important;
+
+  a {
+    color: #00458F !important;
+  }
+}

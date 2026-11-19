@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title th:text="${titulo}"></title>
+
+<!-- Fuente Nunito -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap"
+	rel="stylesheet">
+
+<!-- Bootstrap -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+<style>
+body {
+	font-family: 'Nunito', sans-serif;
+	background-color: #f8f9fa;
+}
+
+.card {
+	height: 100%;
+	max-width: 225px;
+}
+
+.card-img-top {
+	height: 300px;
+	object-fit: cover;
+}
+
+.price-normal {
+	color: #f51544;
+	text-decoration: line-through;
+	font-size: 0.8em;
+}
+
+.price-discounted {
+	color: #3368ff;
+	font-size: 1.2em;
+}
+</style>
+</head>
+<body class="container mt-4">
+	<div class="mt-4">
+		<div class="d-flex justify-content-between mb-4">
+			<div>
+				<h1>
+					<a class="text-success nav-link" th:text="${titulo}" href="/"></a>
+				</h1>
+				<small class="text-secondary ms-2" th:text="${subtitulo}"></small>
+			</div>
+
+			<div class="d-flex align-items-center">
+				<a href="/cart" class="btn btn-success"
+					style="padding: 10px 30px"> <i
+					class="fas fa-shopping-cart me-2"></i> <span
+					th:text="${xCarrito > 0 ? 'Ver carrito (' + xCarrito + ')' : 'Ver carrito'}"></span>
+				</a>
+			</div>
+		</div>
+		<hr>
+
+		<!-- Lista de Artículos  -->
+		<div class="row my-5">
+			<div class="col-12 col-md-4 mb-4"
+				th:each="videojuego : ${videojuegos}">
+				<div class="card mx-auto">
+					<img th:src="@{${videojuego.imagenUrl}}" class="card-img-top"
+						alt="Imagen de ${videojuego.titulo}">
+					<div class="card-body d-flex flex-column justify-content-between">
+						<div class="mb-3">
+							<h5 class="card-title" th:text="${videojuego.titulo}"></h5>
+							<span class="card-text price-normal"
+								th:text="'S/. ' + ${#numbers.formatDecimal(videojuego.precio, 1, 'COMMA', 2, 'POINT')}"></span>
+							<br> <span class="card-text price-discounted"
+								th:text="'S/. ' + ${#numbers.formatDecimal(videojuego.precioDescontado, 1, 'COMMA', 2, 'POINT')}"></span>
+						</div>
+						<form th:action="@{/add-to-cart}" method="post">
+							<input type="hidden" name="id" th:value="${videojuego.id}" />
+							<button type="submit" class="btn btn-success">
+								<i class="fas fa-plus"></i> Añadir al carrito
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Bootstrap JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
