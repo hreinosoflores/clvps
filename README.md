@@ -13,7 +13,7 @@ Requisitos previos:
 - Java 21
 - MySQL en ejecución
 
-## Cliente
+## /web
 
 Instale las dependencias y ejecute el cliente Angular:
 
@@ -25,7 +25,7 @@ npm start
 
 Después abra <http://localhost:4200>.
 
-## API
+## /api
 
 Antes de iniciar la API, configure en `api\clvps-prototipo-servicio\appsettings.json` una cadena de conexión válida para MySQL. Por defecto se usa la base de datos `clvps`, el usuario `root` y la contraseña `mysql`.
 
@@ -46,7 +46,7 @@ dotnet run --no-launch-profile
 
 La API quedará disponible en <https://localhost:44304>.
 
-## Tienda Virtual
+## /tienda-virtual
 
 La tienda usa Java 21 y el Maven Wrapper incluido, por lo que no necesita una instalación global de Maven:
 
